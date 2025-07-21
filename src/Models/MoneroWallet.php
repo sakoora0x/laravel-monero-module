@@ -11,6 +11,8 @@ use Mollsoft\LaravelMoneroModule\Facades\Monero;
 
 class MoneroWallet extends Model
 {
+    protected static array $plainPasswords = [];
+
     protected $fillable = [
         'node_id',
         'name',
@@ -22,6 +24,8 @@ class MoneroWallet extends Model
         'unlocked_balance',
         'sync_at',
         'touch_at',
+        'daemon_height',
+        'wallet_height',
     ];
 
     protected $hidden = [
@@ -36,6 +40,8 @@ class MoneroWallet extends Model
         'balance' => BigDecimalCast::class,
         'unlocked_balance' => BigDecimalCast::class,
         'touch_at' => 'datetime',
+        'daemon_height' => 'integer',
+        'wallet_height' => 'integer',
     ];
 
     public function node(): BelongsTo
@@ -63,4 +69,16 @@ class MoneroWallet extends Model
     {
         return $this->hasMany(Monero::getModelDeposit(), 'wallet_id');
     }
+
+    public function unlockWallet(?string $password): void
+    {
+        self::$plainPasswords[$this->name] = $password;
+    }
+
+    public function getPlainPasswordAttribute(): ?string
+    {
+        return self::$plainPasswords[$this->name] ?? null;
+    }
+
+
 }

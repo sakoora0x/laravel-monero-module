@@ -73,7 +73,13 @@ trait Nodes
         ]);
         $process = SupervisorService::startProcess($node);
         $node->pid = $process->getPid();
-        $node->api();
+        try {
+            $node->api()->getDaemonHeight();
+        }
+        catch (\Exception $e) {
+            $process->stop(3);
+            throw $e;
+        }
         $node->save();
 
         return $node;

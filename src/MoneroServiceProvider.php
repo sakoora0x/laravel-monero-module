@@ -4,8 +4,8 @@ namespace Mollsoft\LaravelMoneroModule;
 
 use Mollsoft\LaravelMoneroModule\Commands\MoneroCommand;
 use Mollsoft\LaravelMoneroModule\Commands\MoneroNodeSyncCommand;
-use Mollsoft\LaravelMoneroModule\Commands\MoneroWalletRPCCommand;
 use Mollsoft\LaravelMoneroModule\Commands\MoneroSyncCommand;
+use Mollsoft\LaravelMoneroModule\Commands\MoneroWalletRPCCommand;
 use Mollsoft\LaravelMoneroModule\Commands\MoneroWalletSyncCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;

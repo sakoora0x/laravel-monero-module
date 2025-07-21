@@ -11,6 +11,7 @@ use Mollsoft\LaravelMoneroModule\Concerns\Wallets;
 use Mollsoft\LaravelMoneroModule\Models\MoneroAccount;
 use Mollsoft\LaravelMoneroModule\Models\MoneroDeposit;
 use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
+use Mollsoft\LaravelMoneroModule\Models\MoneroTransaction;
 use Mollsoft\LaravelMoneroModule\Models\MoneroWallet;
 use Mollsoft\LaravelMoneroModule\WebhookHandlers\WebhookHandlerInterface;
 
@@ -57,12 +58,21 @@ class Monero
     {
         return config('monero.models.deposit');
     }
+
     /**
      * @return class-string<WebhookHandlerInterface>
      */
     public function getModelWebhook(): string
     {
         return config('monero.webhook_handler');
+    }
+
+    /**
+     * @return class-string<MoneroTransaction>
+     */
+    public function getModelTransaction(): string
+    {
+        return config('monero.models.transaction');
     }
 
     public function atomicLock(string $name, ?callable $callback, ?int $wait = null): mixed
@@ -85,7 +95,7 @@ class Monero
 
     public function walletAtomicLock(MoneroWallet $wallet, ?callable $callback, ?int $wait = null): mixed
     {
-        if( !$wallet->node->isLocal() ) {
+        if( $wallet->node->isLocal() ) {
             return call_user_func($callback);
         }
 

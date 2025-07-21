@@ -182,5 +182,8 @@ class SupervisorService extends BaseConsole
             exec("kill -9 {$pid}");
             $this->log("Killed process with PID {$pid}");
         }
+        else {
+            $this->log("Process with PID {$pid} is not killed", 'error');
+        }
     }
 }

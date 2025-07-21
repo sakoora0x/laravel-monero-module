@@ -40,6 +40,7 @@ return [
         'account' => \Mollsoft\LaravelMoneroModule\Models\MoneroAccount::class,
         'address' => \Mollsoft\LaravelMoneroModule\Models\MoneroAddress::class,
         'deposit' => \Mollsoft\LaravelMoneroModule\Models\MoneroDeposit::class,
+        'transaction' => \Mollsoft\LaravelMoneroModule\Models\MoneroTransaction::class,
     ],
 
     /*

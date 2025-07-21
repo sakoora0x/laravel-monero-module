@@ -30,7 +30,6 @@ class MoneroNode extends Model
     protected $casts = [
         'port' => 'integer',
         'password' => 'encrypted',
-        'daemon' => 'array',
         'pid' => 'integer',
         'sync_at' => 'datetime',
     ];
@@ -55,6 +54,7 @@ class MoneroNode extends Model
                 port: $this->port,
                 username: $this->username,
                 password: $this->password,
+                daemon: $this->daemon,
             );
 
             $api->getVersion();

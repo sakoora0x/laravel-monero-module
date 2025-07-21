@@ -94,7 +94,7 @@ trait Wallets
             function () use ($node, $name, $mnemonic, $password, $language, $restoreHeight) {
                 $api = $node->api();
 
-                $restoreHeight = $restoreHeight ?? $api->getHeight();
+                $restoreHeight = $restoreHeight ?? $api->getDaemonHeight();
 
                 try {
                     $api->openWallet($name, $password);
@@ -145,5 +145,66 @@ trait Wallets
         $convertBIP39 = $this->convertBIP39($mnemonic, $passphrase);
 
         return $this->restoreWallet($node, $name, $convertBIP39->mnemonic, $password, $restoreHeight, 'English');
+    }
+
+    public function restoreWalletFromKeys(
+        MoneroNode $node,
+        string $name,
+        string $address,
+        string $viewPrivateKey,
+        string $spendPrivateKey,
+        ?int $restoreHeight = null,
+        ?string $password = null,
+    ): MoneroWallet {
+
+        return Monero::nodeAtomicLock(
+            $node,
+            function () use ($node, $name, $address, $restoreHeight, $viewPrivateKey, $spendPrivateKey, $password) {
+                $api = $node->api();
+
+                $restoreHeight = $restoreHeight ?? $api->getDaemonHeight();
+
+                try {
+                    $api->openWallet($name, $password);
+                } catch (\Exception) {
+                    $api->generateFromKeys(
+                        name: $name,
+                        address: $address,
+                        viewKey: $viewPrivateKey,
+                        spendKey: $spendPrivateKey,
+                        password: $password,
+                        restoreHeight: $restoreHeight,
+                    );
+                }
+
+                $wallet = $node->wallets()->create([
+                    'name' => $name,
+                    'password' => $password,
+                    'restore_height' => $restoreHeight
+                ]);
+
+                $getAccounts = $api->getAccounts();
+                foreach ($getAccounts['subaddress_accounts'] as $item) {
+                    $account = $wallet->accounts()->create([
+                        'base_address' => $item['base_address'],
+                        'account_index' => $item['account_index'],
+                        'title' => 'Primary Account',
+                    ]);
+
+                    $getAddress = $api->getAddress($account->account_index);
+
+                    foreach ($getAddress['addresses'] as $addressItem) {
+                        $account->addresses()->create([
+                            'wallet_id' => $wallet->id,
+                            'address' => $addressItem['address'],
+                            'address_index' => $addressItem['address_index'],
+                            'title' => $addressItem['label'] ?: null,
+                        ]);
+                    }
+                }
+
+                return $wallet;
+            }
+        );
     }
 }

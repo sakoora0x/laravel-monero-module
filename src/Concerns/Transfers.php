@@ -8,6 +8,35 @@ use Mollsoft\LaravelMoneroModule\Models\MoneroAccount;
 
 trait Transfers
 {
+    public function sendMany(MoneroAccount $account, array $destinations, ?array $subaddrIndices = null): string
+    {
+        return Monero::generalAtomicLock($account->wallet, function() use ($account, $destinations, $subaddrIndices) {
+            $wallet = $account->wallet;
+            $api = $wallet->node->api();
+
+            if( !$wallet->node->isLocal() ) {
+                $api->openWallet($wallet->name, $wallet->password);
+            }
+
+            $destinationsArray = [];
+            foreach( $destinations as $address => $amount ) {
+                if (!($amount instanceof BigDecimal)) {
+                    $amount = BigDecimal::of($amount);
+                }
+                $destinationsArray[] = [
+                    'amount' => $amount->multipliedBy(pow(10, 12))->toInt(),
+                    'address' => $address,
+                ];
+            }
+
+            return $api->request('transfer', [
+                'destinations' => $destinationsArray,
+                'account_index' => $account->account_index,
+                'subaddr_indices' => $subaddrIndices,
+            ])['tx_hash'];
+        });
+    }
+
     public function send(MoneroAccount $account, string $address, int|float|string|BigDecimal $amount): string
     {
         return Monero::generalAtomicLock($account->wallet, function() use ($account, $address, $amount) {
@@ -18,7 +47,9 @@ trait Transfers
             $wallet = $account->wallet;
             $api = $wallet->node->api();
 
-            $api->openWallet($wallet->name, $wallet->password);
+            if( !$wallet->node->isLocal() ) {
+                $api->openWallet($wallet->name, $wallet->password);
+            }
 
             return $api->request('transfer', [
                 'destinations' => [

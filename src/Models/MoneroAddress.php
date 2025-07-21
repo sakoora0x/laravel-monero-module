@@ -5,6 +5,9 @@ namespace Mollsoft\LaravelMoneroModule\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Mollsoft\LaravelEthereumModule\Enums\EthereumModel;
+use Mollsoft\LaravelEthereumModule\Facades\Ethereum;
+use Mollsoft\LaravelEthereumModule\Models\EthereumTransaction;
 use Mollsoft\LaravelMoneroModule\Casts\BigDecimalCast;
 use Mollsoft\LaravelMoneroModule\Facades\Monero;
 
@@ -18,12 +21,16 @@ class MoneroAddress extends Model
         'title',
         'balance',
         'unlocked_balance',
+        'sync_at',
+        'available',
     ];
 
     protected $casts = [
         'address_index' => 'integer',
         'balance' => BigDecimalCast::class,
         'unlocked_balance' => BigDecimalCast::class,
+        'sync_at' => 'datetime',
+        'available' => 'boolean',
     ];
 
     public function wallet(): BelongsTo
@@ -39,5 +46,10 @@ class MoneroAddress extends Model
     public function deposits(): HasMany
     {
         return $this->hasMany(Monero::getModelDeposit(), 'address_id');
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Monero::getModelTransaction(), 'address', 'address');
     }
 }

@@ -44,9 +44,9 @@ Schedule::command('monero:sync')
     ->runInBackground();
 ```
 
-You must setup Supervisor, create file `/etc/supervisor/conf.d/laravel-monero-module.conf` with content (change user and paths):
+You must setup Supervisor, create file `/etc/supervisor/conf.d/monero.conf` with content (change user and paths):
 ```
-[program:laravel-monero-module]
+[program:monero]
 process_name=%(program_name)s
 command=php /home/forge/example.com/artisan monero
 autostart=true

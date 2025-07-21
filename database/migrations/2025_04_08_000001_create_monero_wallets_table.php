@@ -19,7 +19,8 @@ return new class extends Migration {
                 ->nullable();
             $table->text('password')
                 ->nullable();
-            $table->text('mnemonic');
+            $table->text('mnemonic')
+                ->nullable();
             $table->integer('restore_height');
             $table->decimal('balance', 30, 12)
                 ->nullable();
@@ -28,6 +29,10 @@ return new class extends Migration {
             $table->timestamp('sync_at')
                 ->nullable();
             $table->timestamp('touch_at')
+                ->nullable();
+            $table->integer('daemon_height')
+                ->nullable();
+            $table->integer('wallet_height')
                 ->nullable();
             $table->timestamps();
         });

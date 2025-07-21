@@ -13,7 +13,9 @@ trait Accounts
         return Monero::generalAtomicLock($wallet, function() use ($wallet, $title) {
             $api = $wallet->node->api();
 
-            $api->openWallet($wallet->name, $wallet->password);
+            if( !$wallet->node->isLocal() ) {
+                $api->openWallet($wallet->name, $wallet->password);
+            }
 
             $createAccount = $api->createAccount();
 

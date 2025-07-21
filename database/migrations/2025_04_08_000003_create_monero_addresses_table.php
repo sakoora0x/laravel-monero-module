@@ -25,6 +25,10 @@ return new class extends Migration {
                 ->nullable();
             $table->decimal('unlocked_balance', 30, 12)
                 ->nullable();
+            $table->timestamp('sync_at')
+                ->nullable();
+            $table->boolean('available')
+                ->default(true);
             $table->timestamps();
 
             $table->unique(['account_id', 'address']);
