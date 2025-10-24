@@ -1,13 +1,13 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Models;
+namespace sakoora0x\LaravelMoneroModule\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Mollsoft\LaravelMoneroModule\Casts\BigDecimalCast;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Casts\BigDecimalCast;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
 
 class MoneroWallet extends Model
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Commands;
+namespace sakoora0x\LaravelMoneroModule\Commands;
 
 use Illuminate\Console\Command;
-use Mollsoft\LaravelMoneroModule\Services\WalletRPCInstaller;
+use sakoora0x\LaravelMoneroModule\Services\WalletRPCInstaller;
 
 class MoneroWalletRPCCommand extends Command
 {

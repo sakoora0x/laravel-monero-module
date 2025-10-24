@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
 
 return new class extends Migration {
     public function up(): void

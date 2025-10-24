@@ -1,14 +1,14 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Services\Sync;
+namespace sakoora0x\LaravelMoneroModule\Services\Sync;
 
 
 use Illuminate\Process\InvokedProcess;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Process;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
-use Mollsoft\LaravelMoneroModule\Services\BaseConsole;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Services\BaseConsole;
 
 class MoneroSync extends BaseConsole
 {

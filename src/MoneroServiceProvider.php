@@ -1,12 +1,12 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule;
+namespace sakoora0x\LaravelMoneroModule;
 
-use Mollsoft\LaravelMoneroModule\Commands\MoneroCommand;
-use Mollsoft\LaravelMoneroModule\Commands\MoneroNodeSyncCommand;
-use Mollsoft\LaravelMoneroModule\Commands\MoneroSyncCommand;
-use Mollsoft\LaravelMoneroModule\Commands\MoneroWalletRPCCommand;
-use Mollsoft\LaravelMoneroModule\Commands\MoneroWalletSyncCommand;
+use sakoora0x\LaravelMoneroModule\Commands\MoneroCommand;
+use sakoora0x\LaravelMoneroModule\Commands\MoneroNodeSyncCommand;
+use sakoora0x\LaravelMoneroModule\Commands\MoneroSyncCommand;
+use sakoora0x\LaravelMoneroModule\Commands\MoneroWalletRPCCommand;
+use sakoora0x\LaravelMoneroModule\Commands\MoneroWalletSyncCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -31,7 +31,7 @@ class MoneroServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('mollsoft/laravel-monero-module');
+                    ->askToStarRepoOnGitHub('sakoora0x/laravel-monero-module');
             });
 
         $this->app->singleton(Monero::class);

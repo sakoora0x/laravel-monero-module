@@ -1,11 +1,11 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Models;
+namespace sakoora0x\LaravelMoneroModule\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mollsoft\LaravelMoneroModule\Api\Api;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Api\Api;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
 
 class MoneroNode extends Model
 {

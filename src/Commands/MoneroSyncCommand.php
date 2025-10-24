@@ -1,9 +1,9 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Commands;
+namespace sakoora0x\LaravelMoneroModule\Commands;
 
 use Illuminate\Console\Command;
-use Mollsoft\LaravelMoneroModule\Services\Sync\MoneroSync;
+use sakoora0x\LaravelMoneroModule\Services\Sync\MoneroSync;
 
 class MoneroSyncCommand extends Command
 {

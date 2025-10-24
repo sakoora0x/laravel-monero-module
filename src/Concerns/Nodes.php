@@ -1,11 +1,11 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Concerns;
+namespace sakoora0x\LaravelMoneroModule\Concerns;
 
 use Illuminate\Support\Str;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
-use Mollsoft\LaravelMoneroModule\Services\SupervisorService;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Services\SupervisorService;
 use Symfony\Component\Process\Process;
 
 trait Nodes

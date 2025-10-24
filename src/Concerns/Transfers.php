@@ -1,10 +1,10 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Concerns;
+namespace sakoora0x\LaravelMoneroModule\Concerns;
 
 use Brick\Math\BigDecimal;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroAccount;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroAccount;
 
 trait Transfers
 {

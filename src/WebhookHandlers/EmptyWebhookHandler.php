@@ -1,13 +1,13 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\WebhookHandlers;
+namespace sakoora0x\LaravelMoneroModule\WebhookHandlers;
 
-use Mollsoft\LaravelMoneroModule\Models\MoneroAddress;
+use sakoora0x\LaravelMoneroModule\Models\MoneroAddress;
 use Illuminate\Support\Facades\Log;
-use Mollsoft\LaravelMoneroModule\Models\MoneroAccount;
-use Mollsoft\LaravelMoneroModule\Models\MoneroDeposit;
-use Mollsoft\LaravelMoneroModule\Models\MoneroIntegratedAddress;
-use Mollsoft\LaravelMoneroModule\Models\MoneroWallet;
+use sakoora0x\LaravelMoneroModule\Models\MoneroAccount;
+use sakoora0x\LaravelMoneroModule\Models\MoneroDeposit;
+use sakoora0x\LaravelMoneroModule\Models\MoneroIntegratedAddress;
+use sakoora0x\LaravelMoneroModule\Models\MoneroWallet;
 
 class EmptyWebhookHandler implements WebhookHandlerInterface
 {

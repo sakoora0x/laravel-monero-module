@@ -1,13 +1,13 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Services\Sync;
+namespace sakoora0x\LaravelMoneroModule\Services\Sync;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Date;
-use Mollsoft\LaravelMoneroModule\Api\Api;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
-use Mollsoft\LaravelMoneroModule\Models\MoneroWallet;
-use Mollsoft\LaravelMoneroModule\Services\BaseConsole;
+use sakoora0x\LaravelMoneroModule\Api\Api;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Models\MoneroWallet;
+use sakoora0x\LaravelMoneroModule\Services\BaseConsole;
 
 class NodeSync extends BaseConsole
 {

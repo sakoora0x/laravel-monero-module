@@ -1,6 +1,6 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\DTO;
+namespace sakoora0x\LaravelMoneroModule\DTO;
 
 readonly class BIP39Convert
 {

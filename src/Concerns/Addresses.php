@@ -1,11 +1,11 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Concerns;
+namespace sakoora0x\LaravelMoneroModule\Concerns;
 
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroAccount;
-use Mollsoft\LaravelMoneroModule\Models\MoneroAddress;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroAccount;
+use sakoora0x\LaravelMoneroModule\Models\MoneroAddress;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
 
 trait Addresses
 {

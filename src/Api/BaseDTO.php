@@ -1,6 +1,6 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Api;
+namespace sakoora0x\LaravelMoneroModule\Api;
 
 abstract class BaseDTO
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Services;
+namespace sakoora0x\LaravelMoneroModule\Services;
 
 use Illuminate\Support\Facades\File;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Facades;
+namespace sakoora0x\LaravelMoneroModule\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -8,6 +8,6 @@ class Monero extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Mollsoft\LaravelMoneroModule\Monero::class;
+        return \sakoora0x\LaravelMoneroModule\Monero::class;
     }
 }

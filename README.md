@@ -6,7 +6,7 @@ Organization of payment acceptance and automation of payments of XMR coins on th
 
 You can install the package via composer:
 ```bash
-composer require mollsoft/laravel-monero-module
+composer require sakoora0x/laravel-monero-module
 ```
 
 After you can run installer using command:
@@ -28,12 +28,12 @@ Register Service Provider and Facade in app, edit `config/app.php`:
 ```php
 'providers' => ServiceProvider::defaultProviders()->merge([
     ...,
-    \Mollsoft\LaravelMoneroModule\MoneroServiceProvider::class,
+    \sakoora0x\LaravelMoneroModule\MoneroServiceProvider::class,
 ])->toArray(),
 
 'aliases' => Facade::defaultAliases()->merge([
     ...,
-    'Monero' => \Mollsoft\LaravelMoneroModule\Facades\Monero::class,
+    'Monero' => \sakoora0x\LaravelMoneroModule\Facades\Monero::class,
 ])->toArray(),
 ```
 

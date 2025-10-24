@@ -1,13 +1,13 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Commands;
+namespace sakoora0x\LaravelMoneroModule\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\App;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroWallet;
-use Mollsoft\LaravelMoneroModule\Services\Sync\WalletSync;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroWallet;
+use sakoora0x\LaravelMoneroModule\Services\Sync\WalletSync;
 
 class MoneroWalletSyncCommand extends Command
 {

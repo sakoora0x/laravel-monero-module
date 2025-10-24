@@ -1,9 +1,9 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Services;
+namespace sakoora0x\LaravelMoneroModule\Services;
 
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
 use Symfony\Component\Process\Process;
 
 class SupervisorService extends BaseConsole

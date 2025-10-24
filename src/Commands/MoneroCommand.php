@@ -1,9 +1,9 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Commands;
+namespace sakoora0x\LaravelMoneroModule\Commands;
 
 use Illuminate\Console\Command;
-use Mollsoft\LaravelMoneroModule\Services\SupervisorService;
+use sakoora0x\LaravelMoneroModule\Services\SupervisorService;
 
 class MoneroCommand extends Command
 {

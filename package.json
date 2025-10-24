@@ -15,5 +15,8 @@
     "js-sha3": "^0.9.3",
     "monero-javascript": "^0.8.4",
     "monero-ts": "^0.11.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.11"
   }
 }

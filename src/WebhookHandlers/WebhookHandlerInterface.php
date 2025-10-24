@@ -1,8 +1,8 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\WebhookHandlers;
+namespace sakoora0x\LaravelMoneroModule\WebhookHandlers;
 
-use Mollsoft\LaravelMoneroModule\Models\MoneroDeposit;
+use sakoora0x\LaravelMoneroModule\Models\MoneroDeposit;
 
 interface WebhookHandlerInterface
 {

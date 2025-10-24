@@ -21,26 +21,26 @@ return [
     /*
      * Sets the handler to be used when Monero Wallet has a new deposit.
      */
-    'webhook_handler' => \Mollsoft\LaravelMoneroModule\WebhookHandlers\EmptyWebhookHandler::class,
+    'webhook_handler' => \sakoora0x\LaravelMoneroModule\WebhookHandlers\EmptyWebhookHandler::class,
 
     /*
      * Set model class to allow more customization.
      *
-     * Api model must be or extend `Mollsoft\LaravelMoneroModule\Api\Api::class`
-     * MoneroNode model must be or extend `Mollsoft\LaravelMoneroModule\Models\MoneroNode::class`
-     * MoneroWallet model must be or extend `Mollsoft\LaravelMoneroModule\Models\MoneroWallet::class`
-     * MoneroAccount model must be or extend `Mollsoft\LaravelMoneroModule\Models\MoneroAccount::class`
-     * MoneroAddress model must be or extend `Mollsoft\LaravelMoneroModule\Models\MoneroAddress::class`
-     * MoneroDeposit model must be or extend `Mollsoft\LaravelMoneroModule\Models\MoneroDeposit::class`
+     * Api model must be or extend `sakoora0x\LaravelMoneroModule\Api\Api::class`
+     * MoneroNode model must be or extend `sakoora0x\LaravelMoneroModule\Models\MoneroNode::class`
+     * MoneroWallet model must be or extend `sakoora0x\LaravelMoneroModule\Models\MoneroWallet::class`
+     * MoneroAccount model must be or extend `sakoora0x\LaravelMoneroModule\Models\MoneroAccount::class`
+     * MoneroAddress model must be or extend `sakoora0x\LaravelMoneroModule\Models\MoneroAddress::class`
+     * MoneroDeposit model must be or extend `sakoora0x\LaravelMoneroModule\Models\MoneroDeposit::class`
      */
     'models' => [
-        'api' => \Mollsoft\LaravelMoneroModule\Api\Api::class,
-        'node' => \Mollsoft\LaravelMoneroModule\Models\MoneroNode::class,
-        'wallet' => \Mollsoft\LaravelMoneroModule\Models\MoneroWallet::class,
-        'account' => \Mollsoft\LaravelMoneroModule\Models\MoneroAccount::class,
-        'address' => \Mollsoft\LaravelMoneroModule\Models\MoneroAddress::class,
-        'deposit' => \Mollsoft\LaravelMoneroModule\Models\MoneroDeposit::class,
-        'transaction' => \Mollsoft\LaravelMoneroModule\Models\MoneroTransaction::class,
+        'api' => \sakoora0x\LaravelMoneroModule\Api\Api::class,
+        'node' => \sakoora0x\LaravelMoneroModule\Models\MoneroNode::class,
+        'wallet' => \sakoora0x\LaravelMoneroModule\Models\MoneroWallet::class,
+        'account' => \sakoora0x\LaravelMoneroModule\Models\MoneroAccount::class,
+        'address' => \sakoora0x\LaravelMoneroModule\Models\MoneroAddress::class,
+        'deposit' => \sakoora0x\LaravelMoneroModule\Models\MoneroDeposit::class,
+        'transaction' => \sakoora0x\LaravelMoneroModule\Models\MoneroTransaction::class,
     ],
 
     /*
@@ -48,7 +48,7 @@ return [
      * These settings are intended to be limiting.
      */
     'atomic_lock' => [
-        'prefix' => '\Mollsoft\LaravelMoneroModule',
+        'prefix' => '\sakoora0x\LaravelMoneroModule',
         'timeout' => 300,
         'wait' => 15,
     ],

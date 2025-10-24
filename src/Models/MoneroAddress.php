@@ -1,15 +1,15 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Models;
+namespace sakoora0x\LaravelMoneroModule\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Mollsoft\LaravelEthereumModule\Enums\EthereumModel;
-use Mollsoft\LaravelEthereumModule\Facades\Ethereum;
-use Mollsoft\LaravelEthereumModule\Models\EthereumTransaction;
-use Mollsoft\LaravelMoneroModule\Casts\BigDecimalCast;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelEthereumModule\Enums\EthereumModel;
+use sakoora0x\LaravelEthereumModule\Facades\Ethereum;
+use sakoora0x\LaravelEthereumModule\Models\EthereumTransaction;
+use sakoora0x\LaravelMoneroModule\Casts\BigDecimalCast;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
 
 class MoneroAddress extends Model
 {

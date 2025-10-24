@@ -1,11 +1,11 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Commands;
+namespace sakoora0x\LaravelMoneroModule\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Services\Sync\NodeSync;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Services\Sync\NodeSync;
 
 class MoneroNodeSyncCommand extends Command
 {

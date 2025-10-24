@@ -1,12 +1,12 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Concerns;
+namespace sakoora0x\LaravelMoneroModule\Concerns;
 
 use Illuminate\Support\Facades\Process;
-use Mollsoft\LaravelMoneroModule\DTO\BIP39Convert;
-use Mollsoft\LaravelMoneroModule\Facades\Monero;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
-use Mollsoft\LaravelMoneroModule\Models\MoneroWallet;
+use sakoora0x\LaravelMoneroModule\DTO\BIP39Convert;
+use sakoora0x\LaravelMoneroModule\Facades\Monero;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Models\MoneroWallet;
 
 trait Wallets
 {

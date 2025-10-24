@@ -1,10 +1,10 @@
 <?php
 
-namespace Mollsoft\LaravelMoneroModule\Api;
+namespace sakoora0x\LaravelMoneroModule\Api;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Mollsoft\LaravelMoneroModule\Models\MoneroNode;
+use sakoora0x\LaravelMoneroModule\Models\MoneroNode;
 
 class Api
 {
