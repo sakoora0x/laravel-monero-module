@@ -25,7 +25,7 @@ class MoneroWalletSyncCommand extends Command
             Monero::nodeAtomicLock($wallet->node, fn() => $this->runSync($wallet), 5);
         }
         catch(LockTimeoutException) {
-            $this->warn("Node сейчас занята другим процессом");
+            $this->warn("Node is currently busy with another process");
         }
     }
 
