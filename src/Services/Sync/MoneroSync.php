@@ -40,7 +40,7 @@ class MoneroSync extends BaseConsole
                         $this->runProcess($node);
                     }
                     else {
-                        $this->log("Синхронизация Node $node->name не требуется, нет touch адресов.");
+                        $this->log("Node $node->name synchronization not required, no touched addresses.");
                     }
                 }
                 else {
@@ -51,16 +51,16 @@ class MoneroSync extends BaseConsole
         foreach ($this->processes as $name => $process) {
             $result = $process->wait();
             if ($result->successful()) {
-                $this->log("Node $name успешно синхронизирована!", "success");
+                $this->log("Node $name synchronized successfully!", "success");
             } else {
-                $this->log("Node $name не смогло синхронизироваться!", "error");
+                $this->log("Node $name failed to synchronize!", "error");
             }
         }
     }
 
     protected function runProcess(MoneroNode $node): void
     {
-        $this->log("Запускаем процесс синхронизации Node $node->name...", "info");
+        $this->log("Starting synchronization process for Node $node->name...", "info");
 
         $process = Process::start(['php', 'artisan', 'monero:node-sync', $node->id], function ($type, $output) {
             $output = explode("\n", $output);
@@ -72,6 +72,6 @@ class MoneroSync extends BaseConsole
         });
         $this->processes[$node->name] = $process;
 
-        $this->log("Процесс успешно запущен: {$process->id()}", "info");
+        $this->log("Process started successfully: {$process->id()}", "info");
     }
 }

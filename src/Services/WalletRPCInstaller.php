@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 
 class WalletRPCInstaller extends BaseConsole
 {
-    protected string $version = 'v0.18.3.1';
+    protected string $version = 'v0.18.3.4';
     protected string $storagePath;
 
     public function __construct()
@@ -24,31 +24,31 @@ class WalletRPCInstaller extends BaseConsole
     {
         $os = PHP_OS_FAMILY;
         $arch = php_uname('m');
-        $this->log("Операционная система: $os, архитектура: $arch");
+        $this->log("Operating system: $os, architecture: $arch");
 
         $url = $this->getDownloadUrl($os, $arch);
         if (!$url) {
-            $this->log('❌ Не удалось определить ссылку для скачивания Monero.', 'error');
+            $this->log('❌ Failed to determine download URL for Monero.', 'error');
             return false;
         }
 
-        // Временная рабочая директория в /tmp
+        // Temporary working directory in /tmp
         $tempRoot = '/tmp/monero-temp-' . time();
         $archive = "$tempRoot/monero.tar.bz2";
         $outputDir = "$tempRoot/extracted";
 
         File::makeDirectory($outputDir, 0755, true, true);
 
-        $this->log("📥 Скачивание Monero с: $url");
+        $this->log("📥 Downloading Monero from: $url");
         $this->downloadWithProgress($url, $archive);
-        $this->log('✅ Скачивание завершено, распаковка...', 'success');
+        $this->log('✅ Download complete, extracting...', 'success');
 
         shell_exec("tar -xvjf $archive -C $outputDir");
-        $this->log('✅ Распаковка завершена!', 'success');
+        $this->log('✅ Extraction complete!', 'success');
 
         $rpcPath = $this->findBinary($outputDir, 'monero-wallet-rpc');
         if (!$rpcPath) {
-            $this->log('❌ Не удалось найти бинарник monero-wallet-rpc', 'error');
+            $this->log('❌ Failed to find monero-wallet-rpc binary', 'error');
             return false;
         }
 
@@ -59,16 +59,16 @@ class WalletRPCInstaller extends BaseConsole
 
         File::move($rpcPath, $finalPath);
         chmod($finalPath, 0755);
-        $this->log("✅ monero-wallet-rpc установлен: $finalPath", 'success');
+        $this->log("✅ monero-wallet-rpc installed: $finalPath", 'success');
 
-        // 🧹 Удаляем /tmp
-        $this->log('🧹 Очистка временных файлов...');
+        // 🧹 Clean up /tmp
+        $this->log('🧹 Cleaning up temporary files...');
         if (File::isDirectory($tempRoot)) {
             File::deleteDirectory($tempRoot);
-            $this->log("🗑 Удалена временная папка $tempRoot");
+            $this->log("🗑 Removed temporary folder $tempRoot");
         }
 
-        $this->log('✅ Установка завершена!', 'success');
+        $this->log('✅ Installation complete!', 'success');
         return true;
     }
 
@@ -76,7 +76,7 @@ class WalletRPCInstaller extends BaseConsole
     {
         $fp = fopen($destination, 'w+');
         if (!$fp) {
-            throw new \RuntimeException("Не удалось открыть файл для записи: $destination");
+            throw new \RuntimeException("Failed to open file for writing: $destination");
         }
 
         $ch = curl_init($url);
@@ -92,13 +92,13 @@ class WalletRPCInstaller extends BaseConsole
         ) {
             if ($downloadSize > 0) {
                 $percent = round($downloaded * 100 / $downloadSize, 1);
-                echo "\r📦 Прогресс загрузки: {$percent}%";
+                echo "\r📦 Download progress: {$percent}%";
             }
         });
 
         $result = curl_exec($ch);
         if ($result === false) {
-            throw new \RuntimeException("Ошибка при скачивании: " . curl_error($ch));
+            throw new \RuntimeException("Download error: " . curl_error($ch));
         }
 
         curl_close($ch);

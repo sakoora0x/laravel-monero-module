@@ -13,6 +13,8 @@ return new class extends Migration {
                 ->unique();
             $table->string('title')
                 ->nullable();
+            $table->string('scheme')
+                ->default('http');
             $table->string('host')
                 ->default('127.0.0.1');
             $table->integer('port');

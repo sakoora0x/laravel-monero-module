@@ -14,6 +14,7 @@ trait CreatesModels
         return MoneroNode::create(array_merge([
             'name' => 'test_node_' . uniqid(),
             'title' => 'Test Node',
+            'scheme' => 'http',
             'host' => 'localhost',
             'port' => 18081,
         ], $attributes));

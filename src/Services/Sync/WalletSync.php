@@ -39,7 +39,7 @@ class WalletSync extends BaseConsole
     {
         parent::run();
 
-        $this->log("Начинаем синхронизацию кошелька {$this->wallet->name}...");
+        $this->log("Starting wallet synchronization for {$this->wallet->name}...");
 
         try {
             Monero::walletAtomicLock($this->wallet, function () {
@@ -51,27 +51,27 @@ class WalletSync extends BaseConsole
                     ->runWebhooks();
             }, 5);
         } catch (LockTimeoutException $e) {
-            $this->log("Ошибка: кошелек сейчас заблокирован другим процессом.", "error");
+            $this->log("Error: wallet is currently locked by another process.", "error");
             return;
         } catch (\Exception $e) {
-            $this->log("Ошибка: {$e->getMessage()}", "error");
+            $this->log("Error: {$e->getMessage()}", "error");
             return;
         }
 
-        $this->log("Кошелек {$this->wallet->name} успешно синхронизирован!");
+        $this->log("Wallet {$this->wallet->name} synchronized successfully!");
     }
 
     protected function apiConnect(): static
     {
         if (!$this->api) {
-            $this->log("Подключаемся к Node по API...");
+            $this->log("Connecting to Node via API...");
             $this->api = $this->node->api();
-            $this->log("Подключение к API успешно выполнено!");
+            $this->log("API connection established successfully!");
         }
 
-        $this->log("Запрашиваем высоту синхронизации ноды...");
+        $this->log("Requesting node synchronization height...");
         $daemonHeight = $this->api->getDaemonHeight();
-        $this->log("Результат: $daemonHeight");
+        $this->log("Result: $daemonHeight");
 
         $this->wallet->update(['daemon_height' => $daemonHeight]);
 
@@ -80,13 +80,13 @@ class WalletSync extends BaseConsole
 
     protected function openWallet(): self
     {
-        $this->log("Открываем кошелек {$this->wallet->name}...");
+        $this->log("Opening wallet {$this->wallet->name}...");
         $this->api->openWallet($this->wallet->name, $this->wallet->password);
-        $this->log('Кошелек успешно открыт!');
+        $this->log('Wallet opened successfully!');
 
-        $this->log("Запрашиваем высоту синхронизации кошелька...");
+        $this->log("Requesting wallet synchronization height...");
         $walletHeight = $this->api->getHeight();
-        $this->log("Результат: $walletHeight");
+        $this->log("Result: $walletHeight");
 
         $this->wallet->update(['wallet_height' => $walletHeight]);
 
@@ -95,9 +95,9 @@ class WalletSync extends BaseConsole
 
     protected function getBalances(): self
     {
-        $this->log('Запрашиваем список счетов через метод get_accounts...');
+        $this->log('Requesting account list via get_accounts method...');
         $getAccounts = $this->api->getAccounts();
-        $this->log('Успешно: '.json_encode($getAccounts));
+        $this->log('Success: '.json_encode($getAccounts));
 
         $balance = BigDecimal::of($getAccounts['total_balance'] ?: '0')->dividedBy(pow(10, 12), 12);
         $unlockedBalance = BigDecimal::of($getAccounts['total_unlocked_balance'] ?: '0')->dividedBy(pow(10, 12), 12);
@@ -123,9 +123,9 @@ class WalletSync extends BaseConsole
                     'sync_at' => now(),
                 ]);
 
-            $this->log('Запрашиваем список адресов аккаунта '.$item['account_index'].' через метод get_address ...');
+            $this->log('Requesting address list for account '.$item['account_index'].' via get_address method...');
             $getAddress = $this->api->getAddress($item['account_index']);
-            $this->log('Успешно: '.json_encode($getAddress));
+            $this->log('Success: '.json_encode($getAddress));
             foreach( $getAddress['addresses'] ?? [] as $itemAddress ) {
                 $this->wallet
                     ->addresses()
@@ -146,9 +146,9 @@ class WalletSync extends BaseConsole
                 'sync_at' => now(),
             ]);
 
-        $this->log("Запрашиваем все балансы методом get_balance ...");
+        $this->log("Requesting all balances via get_balance method...");
         $getBalance = $this->api->getAllBalance();
-        $this->log('Успех: '.json_encode($getBalance));
+        $this->log('Success: '.json_encode($getBalance));
         foreach( $getBalance['per_subaddress'] ?? [] as $item ) {
             $isOK = $this->wallet
                 ->addresses()
@@ -159,7 +159,7 @@ class WalletSync extends BaseConsole
                     'sync_at' => now(),
                 ]);
             if( $isOK ) {
-                $this->log('Баланс по адресу '.$item['address'].' успешно обновлен!', 'success');
+                $this->log('Balance for address '.$item['address'].' updated successfully!', 'success');
             }
         }
 
@@ -168,7 +168,7 @@ class WalletSync extends BaseConsole
 
     protected function incomingTransfers(): self
     {
-        $this->log("Запрашиваем историю входящих переводов...");
+        $this->log("Requesting incoming transfer history...");
         $getTransfers = $this->api->request(
             'get_transfers',
             [
@@ -179,7 +179,7 @@ class WalletSync extends BaseConsole
                 'all_accounts' => true
             ]
         );
-        $this->log('История получена: '.json_encode($getTransfers));
+        $this->log('History retrieved: '.json_encode($getTransfers));
 
         $transfers = array_merge($getTransfers['pool'] ?? [], $getTransfers['in'] ?? []);
 
@@ -255,11 +255,11 @@ class WalletSync extends BaseConsole
         if ($this->webhookHandler) {
             foreach ($this->webhooks as $item) {
                 try {
-                    $this->log('Запускаем Webhook на новый Deposit ID#'.$item->id.'...');
+                    $this->log('Running Webhook for new Deposit ID#'.$item->id.'...');
                     $this->webhookHandler->handle($item);
-                    $this->log('Webhook успешно обработан!');
+                    $this->log('Webhook processed successfully!');
                 } catch (\Exception $e) {
-                    $this->log('Ошибка обработки Webhook: '.$e->getMessage());
+                    $this->log('Webhook processing error: '.$e->getMessage());
                     Log::error('Monero WebHook for deposit '.$item->id.' - '.$e->getMessage());
                 }
             }

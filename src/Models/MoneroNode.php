@@ -14,6 +14,7 @@ class MoneroNode extends Model
     protected $fillable = [
         'name',
         'title',
+        'scheme',
         'host',
         'port',
         'username',
@@ -55,6 +56,7 @@ class MoneroNode extends Model
                 username: $this->username,
                 password: $this->password,
                 daemon: $this->daemon,
+                scheme: $this->scheme ?? 'http',
             );
 
             $api->getVersion();

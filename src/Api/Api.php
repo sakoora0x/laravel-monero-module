@@ -14,6 +14,7 @@ class Api
     protected ?string $password;
     protected ?string $daemon;
     protected ?int $pid;
+    protected string $scheme;
 
     public function __construct(
         string $host,
@@ -21,6 +22,7 @@ class Api
         ?string $username = null,
         ?string $password = null,
         ?string $daemon = null,
+        string $scheme = 'http'
     )
     {
         $this->host = $host;
@@ -28,6 +30,7 @@ class Api
         $this->username = $username;
         $this->password = $password;
         $this->daemon = $daemon;
+        $this->scheme = in_array($scheme, ['http', 'https']) ? $scheme : 'http';
     }
 
     public function request(string $method, array $params = [], bool $daemon = false): mixed
@@ -38,11 +41,13 @@ class Api
             $response = Http::timeout(60)
                 ->connectTimeout(10);
 
+            $daemonScheme = str_contains($this->daemon, '://') ? '' : $this->scheme . '://';
+
             if( count($params) ) {
-                $response = $response->post('http://'.$this->daemon.'/'.$method, $params);
+                $response = $response->post($daemonScheme.$this->daemon.'/'.$method, $params);
             }
             else {
-                $response = $response->get('http://'.$this->daemon.'/'.$method);
+                $response = $response->get($daemonScheme.$this->daemon.'/'.$method);
             }
 
             $result = $response->json();
@@ -54,7 +59,7 @@ class Api
             $response = Http::withDigestAuth($this->username ?? '', $this->password ?? '')
                 ->timeout(60)
                 ->connectTimeout(10)
-                ->post('http://'.$this->host.':'.$this->port.'/json_rpc', [
+                ->post($this->scheme.'://'.$this->host.':'.$this->port.'/json_rpc', [
                     'jsonrpc' => '2.0',
                     'id' => $requestId,
                     'method' => $method,

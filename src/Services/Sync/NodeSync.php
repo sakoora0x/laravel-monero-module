@@ -29,7 +29,7 @@ class NodeSync extends BaseConsole
     {
         parent::run();
 
-        $this->log("Начинаем синхронизацию ноды {$this->node->name}...");
+        $this->log("Starting node synchronization for {$this->node->name}...");
 
         $this->node->update([
             'sync_at' => Date::now(),
@@ -39,7 +39,7 @@ class NodeSync extends BaseConsole
             $this->api = $this->node->api();
         }
         catch(\Exception $e) {
-            $this->log("Ошибка: {$e->getMessage()}", "error");
+            $this->log("Error: {$e->getMessage()}", "error");
             return;
         }
 
@@ -57,7 +57,7 @@ class NodeSync extends BaseConsole
                     $service->run();
                 }
                 else {
-                    $this->log("Кошелек {$wallet->name} не требует синхронизации, так как не touch.");
+                    $this->log("Wallet {$wallet->name} does not require synchronization, not touched.");
                 }
             });
 
@@ -65,6 +65,6 @@ class NodeSync extends BaseConsole
             'sync_at' => Date::now(),
         ]);
 
-        $this->log("Синхронизация ноды {$this->node->name} завершена!");
+        $this->log("Node synchronization for {$this->node->name} completed!");
     }
 }
